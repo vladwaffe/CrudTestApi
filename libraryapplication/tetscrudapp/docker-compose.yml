@@ -1,0 +1,8 @@
+services:
+  testcrudapp:
+    build: ./
+    container_name: tetscrudapp1
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./build/libs:/app/build/libs

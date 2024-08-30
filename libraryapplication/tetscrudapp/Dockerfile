@@ -1,4 +1,8 @@
 FROM openjdk:17-jdk-alpine
-VOLUME /tmp
-COPY build/libs/*.jar app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
+WORKDIR /app
+COPY . .
+
+RUN chmod +x gradlew
+RUN ./gradlew build
+COPY build/libs/tetsCrudApp-plain.jar tetsCrudApp.jar
+ENTRYPOINT ["java","-jar","/tetsCrudApp.jar"]
