@@ -1,7 +1,8 @@
+version: '3'
 services:
   testcrudapp:
-    build: ./tetscrudapp
-    container_name: tetscrudapp
+    build: ./testcrudapp
+    container_name: testcrudapp
     ports:
       - "8080:8080"
     environment:
@@ -11,7 +12,9 @@ services:
     depends_on:
       - db1
     volumes:
-      - ./tetscrudapp/build/libs:/app/build/libs
+      - ./testcrudapp/build/libs:/app/build/libs
+    networks:
+      - my_network
 
   libraryservice:
     build: ./libraryservice
@@ -26,6 +29,8 @@ services:
       - db2
     volumes:
       - ./libraryservice/build/libs:/app/build/libs
+    networks:
+      - my_network
 
   db1:
     image: postgres:13
@@ -36,6 +41,8 @@ services:
       - POSTGRES_DB=testCrudApp
     ports:
       - "5433:5432"
+    networks:
+      - my_network
 
   db2:
     image: postgres:13
@@ -46,3 +53,9 @@ services:
       - POSTGRES_DB=LibraryService
     ports:
       - "5434:5432"
+    networks:
+      - my_network
+
+networks:
+  my_network:
+    driver: bridge
