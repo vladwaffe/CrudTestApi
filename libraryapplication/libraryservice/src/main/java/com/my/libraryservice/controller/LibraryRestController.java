@@ -23,9 +23,12 @@ public class LibraryRestController {
     public void addBook(@RequestBody Long bookid) {
         libraryService.addBook(bookid);
     }
+
+
     @DeleteMapping("/library/delete/{id}")
     @Operation(summary = "Удаление книги из бд при удалении книги из главного сервиса")
     public void deleteBook(@PathVariable("id") Long bookid) {
+
         libraryService.deleteById(bookid);
     }
 

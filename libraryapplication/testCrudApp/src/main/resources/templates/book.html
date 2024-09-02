@@ -28,7 +28,7 @@
             <td th:text="${book.description}"></td>
             <td th:text="${status}"></td>
             <td><a th:href="@{http://localhost:8080/book-update/{id}(id=${book.id})}">Edit</a></td>
-            <td><a th:href="@{book-delete/{id}(id=${book.id})}">Delete</a></td>
+            <td><a th:href="@{http://localhost:8080/book-delete/{id}(id=${book.id})}">Delete</a></td>
             <td><a th:href="@{http://localhost:8081/book-time-update/{id}(id=${book.id})}">Edit time</a></td>
         </tr>
         </tbody>

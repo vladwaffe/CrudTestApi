@@ -54,11 +54,12 @@ public class BookController {
     }
 
     @GetMapping("/book-delete/{id}")
-    public String deleteBook(@PathVariable("id") Long id){
+    public String deleteBookForm(@PathVariable("id") Long id){
         restTemplate.delete("http://libraryservice:8081/library/delete/" + id);
         bookService.deleteById(id);
-        return "redirect:books";
+        return "redirect:http://localhost:8080/books";
     }
+
 
 
     @Operation(summary = "Обновление данных о книге", description = "Позволяет изменить данные книги")
