@@ -49,15 +49,15 @@ public class BookController {
     @PostMapping("/book-create")
     public String createBook(Book book){
         bookService.saveBook(book);
-        restTemplate.postForObject("http://localhost:8081/library/books", book.getId(), Book.class);
-        return "redirect:/books";
+        restTemplate.postForObject("http://libraryservice:8081/library/books", book.getId(), Book.class);
+        return "redirect:books";
     }
 
     @GetMapping("/book-delete/{id}")
     public String deleteBook(@PathVariable("id") Long id){
-        restTemplate.delete("http://localhost:8081/library/delete/" + id);
+        restTemplate.delete("http://libraryservice:8081/library/delete/" + id);
         bookService.deleteById(id);
-        return "redirect:/books";
+        return "redirect:books";
     }
 
 
@@ -66,14 +66,14 @@ public class BookController {
     public String updateBookForm(@PathVariable("id") Long id, Model model){
         Book book = bookService.findById(id);
         model.addAttribute("book", book);
-        return "/book-update";
+        return "book-update";
     }
 
     @Operation(summary = "Сохранение изменений данных о книге")
     @PostMapping("/book-update")
     public String updateBook(Book book){
         bookService.updateBook(book);
-        return "redirect:/books";
+        return "redirect:books";
     }
 
 
@@ -82,11 +82,11 @@ public class BookController {
     public String findBookIdForm(Long id, Model model){
         Book book = bookService.findById(id);
         if(book == null){
-            return "/not-found";
+            return "not-found";
         }
         else {
             model.addAttribute("book", book);
-            return "/book";
+            return "book";
         }
 
     }
@@ -96,11 +96,11 @@ public class BookController {
     public String findBookIsbnForm(String isbn, Model model){
         List<Book> books = bookService.findByIsbn(isbn);
         if(books.size()==0){
-            return "/not-found";
+            return "not-found";
         }
         else {
             model.addAttribute("books", books);
-            return "/findBookIsbn";
+            return "findBookIsbn";
         }
     }
 
@@ -109,9 +109,9 @@ public class BookController {
     public String bookInfoForm(@PathVariable("id") Long id, Model model){
         Book book = bookService.findById(id);
         model.addAttribute("book", book);
-        boolean status = restTemplate.postForObject("http://localhost:8081/library/status", book.getId(), boolean.class);
+        boolean status = restTemplate.postForObject("http://libraryservice:8081/library/status", book.getId(), boolean.class);
         model.addAttribute("status", status);
-        return "/book";
+        return "book";
     }
 
 
@@ -120,7 +120,7 @@ public class BookController {
     public String freeBookList(Model model){
         List<Book> books = bookService.getFreeBookList();
         model.addAttribute("books", books);
-        return "/free-book-list";
+        return "free-book-list";
     }
 
 

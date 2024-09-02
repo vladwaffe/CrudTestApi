@@ -24,14 +24,18 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.kafka:spring-kafka'
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0'
     implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webflux-ui', version: '2.0.2'
-    implementation "org.hibernate:hibernate-core:5.6.14.Final"
     implementation "jakarta.transaction:jakarta.transaction-api"
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa:3.3.3'
+    implementation 'org.hibernate.orm:hibernate-core:6.2.0.Final'
+    implementation 'org.antlr:antlr4:4.13.0'
+
+
+
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'org.postgresql:postgresql'
     annotationProcessor 'org.projectlombok:lombok'
@@ -47,6 +51,6 @@ tasks.named('test') {
 }
 
 task run(type: JavaExec) {
-    mainClass = 'com.my.libraryservice.TestCrudAppApplication'
+    mainClass = 'com.my.testcrudapp.TestCrudAppApplication'
     classpath = sourceSets.main.runtimeClasspath
 }

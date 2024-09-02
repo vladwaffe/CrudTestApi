@@ -68,7 +68,7 @@ public class BookService {
         List<Book> books = findAll();
         List<Book> freeBooks = new ArrayList<>();
         for(Book book : books){
-            if(restTemplate.postForObject("http://localhost:8081/library/status", book.getId(), boolean.class)){
+            if(restTemplate.postForObject("http://libraryservice:8081/library/status", book.getId(), boolean.class)){
                 freeBooks.add(book);
             }
         }

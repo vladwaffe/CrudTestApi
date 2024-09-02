@@ -33,7 +33,7 @@ public class LibraryController {
             book.setReturntime(new Timestamp(0));
         }
         model.addAttribute("book", book);
-        return "/book-time-update";
+        return "book-time-update";
     }
 
 
